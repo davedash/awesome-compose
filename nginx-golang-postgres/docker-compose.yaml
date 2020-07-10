@@ -6,6 +6,8 @@ services:
       - db-password
     depends_on:
       - db
+    ports:
+        - "8000"
   db:
     image: postgres
     restart: always
@@ -16,12 +18,12 @@ services:
     environment:
       - POSTGRES_DB=example
       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-    
+
   proxy:
     build: proxy
     ports:
       - 80:80
-    depends_on: 
+    depends_on:
       - backend
 volumes:
   db-data:
